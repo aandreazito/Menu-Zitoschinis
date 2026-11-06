@@ -100,7 +100,7 @@ main { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
 .empty-week h2 { margin: 0; font-family: var(--display); font-size: 24px; font-weight: 500; }
 .empty-week p { margin: 0; color: var(--muted); }
 .btn { border: 1px solid var(--line); background: var(--card); border-radius: 12px; padding: 11px 14px; font-weight: 600; font-size: 15px; text-align: left; display: flex; align-items: center; gap: 10px; }
-.btn.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); justify-content: center; }
+.btn.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); justify-content: center; flex-direction: column; gap: 2px; text-align: center; }
 .btn small { display: block; color: var(--muted); font-weight: 400; font-size: 13px; }
 .btn.primary small { color: inherit; opacity: .75; }
 .btns { display: grid; gap: 8px; }
@@ -512,8 +512,9 @@ function renderWeek() {
   if (Store.denied) html += `<div class="notice">L'account ${esc(Store.user?.email || "")} non è tra quelli autorizzati. <button class="ghost" data-act="signout">Esci e cambia account</button></div>`;
   if (Store.mode === "firebase" && Store.ready && !Store.denied && !Store.weeks.size && window.MENU_SEED) html += `<div class="empty-week"><h2>Archivio vuoto</h2><p>Carica una volta sola lo storico trascritto dai fogli (${window.MENU_SEED.weeks.length} settimane), così le ricette e le proposte sono subito pronte.</p><div class="btns"><button class="btn primary" data-act="importSeed">Carica lo storico</button></div></div>`;
   if (Store.stale) html += `<div class="notice">Il menu condiviso non risponde: quello che vedi potrebbe non essere aggiornato.</div>`;
-  if (!Store.canWrite) html += `<div class="notice">Puoi vedere il menu ma non modificarlo. Chiedi ad Andrea di darti l'accesso come editor.</div>`;
+  if (!Store.canWrite && !Store.denied) html += `<div class="notice">Puoi vedere il menu ma non modificarlo. Chiedi ad Andrea di darti l'accesso come editor.</div>`;
 
+  if (Store.denied) { el.innerHTML = html; return; }
   if (!w && Store.ready) {
     const prev = weekDoc(isoDate(addDays(ui.weekStart, -7)));
     const season = seasonOfMonth(addDays(ui.weekStart, 3).getMonth()).nome.toLowerCase();
