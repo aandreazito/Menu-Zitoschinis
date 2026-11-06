@@ -262,7 +262,8 @@ function toast(msg) {
 
 /* ================= archivio dati =================
    Nell'artifact: database condiviso (collezioni "weeks" e "recipes").
-   Fuori dall'artifact (GitHub Pages / file locale): localStorage, con lo storico iniziale incorporato. */
+   Su Firebase (docs/firebase-config.js presente): Firestore, con accesso Google.
+   Altrimenti (file locale / GitHub Pages): localStorage, con lo storico iniziale incorporato. */
 const Store = {
   mode: "loading", db: null, canWrite: true, weeks: new Map(), recipes: new Map(), ready: false, stale: false,
   chains: new Map(),
@@ -272,7 +273,25 @@ const Store = {
     if (window.claude && typeof window.claude.use === "function") {
       try { db = await window.claude.use("db"); } catch { db = null; }
     }
-    if (db) {
+    if (!db && window.firebase && window.FIREBASE_CONFIG) {
+      /* Firebase (hosting proprio): accesso con Google, dati su Firestore */
+      try {
+        if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
+        this.auth = firebase.auth();
+        const u = await new Promise(r => { const off = this.auth.onAuthStateChanged(x => { off(); r(x); }); });
+        if (!u) { this.mode = "signin"; this.ready = true; this.onChange(); return; }
+        this.user = u; this.mode = "firebase"; this.db = firebase.firestore();
+      } catch (e) { this.mode = "signin"; this.ready = true; this.error = String(e && e.message || e); this.onChange(); return; }
+    }
+    if (this.mode === "firebase") {
+      const db = this.db;
+      const timer = setTimeout(() => { if (!this.ready) { this.stale = true; this.onChange(); } }, 10000);
+      const sub = (name, map) => db.collection(name).onSnapshot(snap => {
+        map.clear(); snap.docs.forEach(d => map.set(d.id, d.data()));
+        clearTimeout(timer); this.ready = true; this.stale = !!snap.metadata.fromCache && !navigator.onLine; this.onChange();
+      }, e => { clearTimeout(timer); this.ready = true; if (e && e.code === "permission-denied") { this.denied = true; this.canWrite = false; } else this.stale = true; this.onChange(); });
+      sub("weeks", this.weeks); sub("recipes", this.recipes);
+    } else if (db) {
       this.mode = "db"; this.db = db;
       try {
         const user = await window.claude.use("user");
@@ -301,27 +320,50 @@ const Store = {
     this.chains.set(path, next);
     return next;
   },
+  get shared() { return this.mode === "db" || this.mode === "firebase"; },
+  async signIn() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    try { await this.auth.signInWithPopup(provider); }
+    catch (e) {
+      if (e && /popup|operation-not-supported/.test(e.code || "")) return this.auth.signInWithRedirect(provider);
+      toast("Accesso non riuscito: " + (e && e.code || "riprova")); return;
+    }
+    location.reload();
+  },
+  async signOut() { await this.auth.signOut(); location.reload(); },
+  async importSeed() {
+    const weeks = (window.MENU_SEED && window.MENU_SEED.weeks) || [];
+    const batch = this.db.batch();
+    weeks.forEach(w => batch.set(this.db.doc("weeks/" + w.id), w));
+    await batch.commit();
+    toast(weeks.length + " settimane caricate");
+  },
+  _err(e) {
+    if (e && e.code === "permission-denied") { this.denied = true; this.canWrite = false; return "questo account non è autorizzato"; }
+    if (e && e.code === "invalid_argument") this.canWrite = false;
+    return e && e.code === "quota_exceeded" ? "archivio pieno" : "riprova tra poco";
+  },
   async saveWeek(w) {
     const doc = clone(w); doc.updatedAt = new Date().toISOString();
     this.weeks.set(w.id, doc);
-    if (this.mode === "db") {
+    if (this.shared) {
       try { await this._write("weeks/" + w.id, () => this.db.doc("weeks/" + w.id).set(doc)); }
-      catch (e) { if (e && e.code === "invalid_argument") this.canWrite = false; toast("Non salvato: " + (e && e.code === "quota_exceeded" ? "archivio pieno" : "riprova tra poco")); throw e; }
+      catch (e) { toast("Non salvato: " + this._err(e)); throw e; }
     } else { ls.set("mz.weeks", Object.fromEntries(this.weeks)); }
     this.onChange();
   },
   async deleteWeek(id) {
     this.weeks.delete(id);
-    if (this.mode === "db") await this._write("weeks/" + id, () => this.db.doc("weeks/" + id).delete());
+    if (this.shared) await this._write("weeks/" + id, () => this.db.doc("weeks/" + id).delete());
     else ls.set("mz.weeks", Object.fromEntries(this.weeks));
     this.onChange();
   },
   async saveRecipe(key, data) {
     const doc = clone(data);
     this.recipes.set(key, doc);
-    if (this.mode === "db") {
+    if (this.shared) {
       try { await this._write("recipes/" + key, () => this.db.doc("recipes/" + key).set(doc)); }
-      catch (e) { toast("Non salvato, riprova"); throw e; }
+      catch (e) { toast("Non salvato: " + this._err(e)); throw e; }
     } else ls.set("mz.recipes", Object.fromEntries(this.recipes));
     this.onChange();
   }
@@ -461,6 +503,14 @@ function renderWeek() {
   if (Store.mode === "loading" || (!Store.ready && !Store.weeks.size)) {
     html += `<div class="status">Carico il menu…</div>`;
   }
+  if (Store.mode === "signin") {
+    el.innerHTML = `<div class="empty-week"><h2>Accedi</h2><p>Il menu è condiviso tra Andrea e Alice: entra con il tuo account Google.</p>
+      ${Store.error ? `<p>Firebase non è partito: ${esc(Store.error)}</p>` : ""}
+      <div class="btns"><button class="btn primary" data-act="signin">Accedi con Google</button></div></div>`;
+    return;
+  }
+  if (Store.denied) html += `<div class="notice">L'account ${esc(Store.user?.email || "")} non è tra quelli autorizzati. <button class="ghost" data-act="signout">Esci e cambia account</button></div>`;
+  if (Store.mode === "firebase" && Store.ready && !Store.denied && !Store.weeks.size && window.MENU_SEED) html += `<div class="empty-week"><h2>Archivio vuoto</h2><p>Carica una volta sola lo storico trascritto dai fogli (${window.MENU_SEED.weeks.length} settimane), così le ricette e le proposte sono subito pronte.</p><div class="btns"><button class="btn primary" data-act="importSeed">Carica lo storico</button></div></div>`;
   if (Store.stale) html += `<div class="notice">Il menu condiviso non risponde: quello che vedi potrebbe non essere aggiornato.</div>`;
   if (!Store.canWrite) html += `<div class="notice">Puoi vedere il menu ma non modificarlo. Chiedi ad Andrea di darti l'accesso come editor.</div>`;
 
@@ -541,14 +591,15 @@ function renderHistory() {
   const weeks = [...Store.weeks.values()].sort((a, b) => a.id < b.id ? 1 : -1);
   const byYear = new Map();
   weeks.forEach(w => { const y = w.id.slice(0, 4); if (!byYear.has(y)) byYear.set(y, []); byYear.get(y).push(w); });
-  if (!weeks.length) { el.innerHTML = `<div class="empty-week"><h2>Nessuna settimana</h2><p>Le settimane che compilate compaiono qui, dalla più recente.</p></div>`; return; }
+  const account = Store.mode === "firebase" ? `<button class="ghost" data-act="signout">Esci (${esc(Store.user?.email || "")})</button>` : "";
+  if (!weeks.length) { el.innerHTML = `<div class="empty-week"><h2>Nessuna settimana</h2><p>Le settimane che compilate compaiono qui, dalla più recente.</p></div>` + account; return; }
   el.innerHTML = [...byYear].map(([y, ws]) => `<div class="sectiontitle">${y} · ${ws.length} settimane</div><div class="rlist">${ws.map(w => {
     const s = parseISO(w.id), e = addDays(s, 6);
     const dinners = (w.days || []).map(d => itemsOf(d.d)[0]?.[1]).filter(it => it && it.t && !it.x).map(it => mainOf(it.t)).slice(0, 4).join(" · ");
     return `<button class="hitem" data-week="${w.id}"><span class="hswatch" style="background:${MONTH_COLORS[addDays(s,3).getMonth()][0]}"></span>
       <span class="hcol"><span class="htitle">${s.getDate()} ${MESI[s.getMonth()].slice(0,3).toLowerCase()} – ${e.getDate()} ${MESI[e.getMonth()].slice(0,3).toLowerCase()}</span><br><span class="hsub">${esc(dinners) || "—"}</span></span>
       <span class="rcount">S${isoWeek(s)}</span></button>`;
-  }).join("")}</div>`).join("");
+  }).join("")}</div>`).join("") + account;
 }
 
 /* ================= sheet ================= */
@@ -789,7 +840,10 @@ document.addEventListener("click", e => {
   const who = t.closest("[data-who]"); if (who) { ui.who = who.dataset.who; ls.set("mz.who", ui.who); render(); return; }
   const act = t.closest("[data-act]"); if (act) {
     const a = act.dataset.act;
-    if (a === "weeknote") editWeekNote(); else if (a === "newrecipe") newRecipe(); else startWeek(a);
+    if (a === "weeknote") editWeekNote(); else if (a === "newrecipe") newRecipe();
+    else if (a === "signin") Store.signIn(); else if (a === "signout") Store.signOut();
+    else if (a === "importSeed") { act.disabled = true; Store.importSeed().catch(e => { act.disabled = false; toast("Non caricato: " + Store._err(e)); }); }
+    else startWeek(a);
     return;
   }
   const se = t.closest("#v-ricette [data-season]"); if (se) { ui.season = se.dataset.season; render(); return; }

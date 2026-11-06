@@ -15,12 +15,14 @@ Il menu settimanale di casa (Andrea = **AZ**, Alice = **AT**) in versione web ap
 
 1. **Artifact su claude.ai** (consigliato) – dati condivisi e sincronizzati tra i telefoni.
    Per far modificare il menu anche ad Alice: menu *Condividi* → invitala per email come **Editor**.
-2. **GitHub Pages / file locale** – `docs/index.html`, i dati restano nel browser del telefono (non sincronizzati).
-   Settings → Pages → branch `main`, cartella `/docs`.
+2. **Firebase** – indirizzo vostro, accesso con Google, dati condivisi su Firestore.
+   Passo passo in [GUIDA-FIREBASE.md](GUIDA-FIREBASE.md).
+3. **GitHub Pages / file locale** – `docs/index.html` senza `docs/firebase-config.js`: i dati restano nel browser del telefono (non sincronizzati).
 
 ## File
 
 - `app/menu.html` – l'app (sorgente unico).
 - `data/storico-2026.txt` – trascrizione dei 32 fogli cartacei (gen–nov 2026), facile da correggere a mano.
 - `tools/converti_storico.py` – txt → `data/storico-2026.json`.
-- `tools/build_pages.py` – crea `docs/index.html` con lo storico incorporato.
+- `tools/build_pages.py` – crea `docs/index.html` con lo storico incorporato (e Firebase, se configurato).
+- `firebase.json`, `firestore.rules`, `docs/firebase-config.example.js` – configurazione Firebase.
