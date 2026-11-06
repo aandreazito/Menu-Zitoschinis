@@ -45,7 +45,7 @@ git checkout menu-digitale
 
 Nell'app comparirà "oppure con la tua email": si scrive l'indirizzo, arriva una mail da
 `noreply@NOME-PROGETTO.firebaseapp.com` con un link, e toccandolo si entra.
-Anche in questo caso entra solo chi è scritto in `firestore.rules`.
+Anche in questo caso entra solo chi è nella lista delle email autorizzate (punto 6b).
 
 ## 5. Crea il database
 
@@ -66,9 +66,15 @@ Apri `docs/firebase-config.js` e incolla i valori del punto 3.
 **Unica differenza:** in `authDomain` scrivi `NOME-PROGETTO.web.app` invece di `NOME-PROGETTO.firebaseapp.com`:
 serve perché l'accesso con Google funzioni su iPhone (Safari blocca i cookie tra domini diversi).
 
-**b) Chi può entrare.** Apri `firestore.rules` e sostituisci `EMAIL_DI_ANDREA` ed `EMAIL_DI_ALICE`
-con i vostri due indirizzi Google, tra apici, per esempio `'nome.cognome@gmail.com'`.
+**b) Chi può entrare.** Le email **non** si scrivono nei file (il repository è pubblico),
+ma nel database, una volta sola. Firebase → **Firestore Database → Dati**:
+1. **Avvia raccolta** → ID raccolta: `config` → Avanti.
+2. ID documento: `accesso`.
+3. Campo: `emails`, tipo **array**. Aggiungi due elementi di tipo **string** con le vostre email,
+   **tutte in minuscolo** (quella Google di Andrea, quella su cui Alice riceve il link). → **Salva**.
+
 Chiunque altro provi ad accedere vedrà "account non autorizzato" e nessun dato.
+Per aggiungere o cambiare un'email in futuro si modifica questo documento: subito attivo, senza ripubblicare.
 
 ## 7. Autorizza il ritorno dall'accesso Google (per iPhone)
 
@@ -123,7 +129,7 @@ Alla fine il terminale scrive l'indirizzo: **Hosting URL: https://NOME-PROGETTO.
 git pull
 python3 tools/build_pages.py
 firebase deploy --only hosting           # solo l'app
-firebase deploy --only firestore:rules   # solo le regole (se cambiate le email)
+firebase deploy --only firestore:rules   # solo le regole (le email NON stanno lì: vedi 6b)
 ```
 
 I dati non si toccano: stanno nel database, non nei file.
@@ -132,7 +138,7 @@ I dati non si toccano: stanno nel database, non nei file.
 
 | Cosa vedi | Cosa fare |
 |---|---|
-| "L'account … non è tra quelli autorizzati" | Controlla le email in `firestore.rules` (scritte uguali all'account Google), poi `firebase deploy --only firestore:rules`. |
+| "L'account … non è tra quelli autorizzati" | Controlla il documento `config/accesso` (punto 6b): l'email deve essere uguale a quella mostrata nel messaggio, in minuscolo, e il campo si deve chiamare `emails` (array). |
 | Su iPhone "Accedi con Google" non fa niente o torna indietro senza entrare | Rivedi i punti 6a (`authDomain` con `.web.app`) e 7, aspetta qualche minuto e riprova. Prova anche da Safari prima che dall'icona sulla Home. |
 | "l'accesso via email non è attivo in Firebase" | Passo 4b: attiva *Link via email*. |
 | La mail con il link non arriva | Guarda nello spam; il mittente è `noreply@NOME-PROGETTO.firebaseapp.com`. |

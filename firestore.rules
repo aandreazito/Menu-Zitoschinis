@@ -1,15 +1,22 @@
 rules_version = '2';
-// Solo Andrea e Alice possono leggere e scrivere il menu.
-// Sostituisci le due email prima di "firebase deploy".
+// Chi può entrare NON è scritto in questo file (il repository è pubblico).
+// Le email autorizzate stanno nel database: documento config/accesso, campo "emails"
+// (un array di stringhe, tutte in minuscolo). Si modificano dalla console Firebase,
+// quindi "firebase deploy" non le cancella mai.
 service cloud.firestore {
   match /databases/{database}/documents {
     function famiglia() {
       return request.auth != null
         && request.auth.token.email_verified == true
-        && request.auth.token.email in ['EMAIL_DI_ANDREA', 'EMAIL_DI_ALICE'];
+        && request.auth.token.email.lower()
+             in get(/databases/$(database)/documents/config/accesso).data.emails;
     }
-    match /{document=**} {
+    match /weeks/{id} {
       allow read, write: if famiglia();
     }
+    match /recipes/{id} {
+      allow read, write: if famiglia();
+    }
+    // config/accesso: nessuno lo legge o lo modifica dall'app, solo dalla console.
   }
 }
