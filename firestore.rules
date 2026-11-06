@@ -6,7 +6,7 @@ service cloud.firestore {
     function famiglia() {
       return request.auth != null
         && request.auth.token.email_verified == true
-        && request.auth.token.email in ['EMAIL_DI_ANDREA', 'EMAIL_DI_ALICE'];
+        && request.auth.token.email in ['andreazito11@gmail.com', 'alicetod@hotmail.it'];
     }
     match /{document=**} {
       allow read, write: if famiglia();
