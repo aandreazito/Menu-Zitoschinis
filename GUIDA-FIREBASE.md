@@ -38,6 +38,15 @@ git checkout menu-digitale
 2. Scheda **Metodo di accesso** → **Google** → attiva l'interruttore, scegli la tua email come email di assistenza → **Salva**.
 3. Scheda **Impostazioni → Domini autorizzati**: controlla che ci sia `NOME-PROGETTO.web.app`. Se manca, aggiungilo.
 
+### 4b. Accesso con link via email (per chi non ha un account Google)
+
+1. Sempre in **Authentication → Metodo di accesso** → **Aggiungi nuovo provider** → **Email/password**.
+2. Attiva **entrambi** gli interruttori: *Email/password* e **Link via email (accesso senza password)** → **Salva**.
+
+Nell'app comparirà "oppure con la tua email": si scrive l'indirizzo, arriva una mail da
+`noreply@NOME-PROGETTO.firebaseapp.com` con un link, e toccandolo si entra.
+Anche in questo caso entra solo chi è scritto in `firestore.rules`.
+
 ## 5. Crea il database
 
 1. Menu a sinistra: **Build → Firestore Database** → **Crea database**.
@@ -99,7 +108,12 @@ Alla fine il terminale scrive l'indirizzo: **Hosting URL: https://NOME-PROGETTO.
 
 - **iPhone:** apri l'indirizzo in **Safari** → tasto Condividi → **Aggiungi alla schermata Home**. Si apre a tutto schermo, come un'app.
 - **Android:** Chrome → menu ⋮ → **Aggiungi a schermata Home**.
-- Alice fa lo stesso e accede con il suo account Google.
+- Alice fa lo stesso. Se non ha un account Google, sceglie **oppure con la tua email**:
+  1. scrive la sua email e tocca **Mandami il link di accesso**;
+  2. apre la mail **sullo stesso telefono** e tocca il link: si apre l'app già dentro (se non la trova, guardare nello spam);
+  3. se usa l'icona sulla schermata Home, su iPhone il link si apre in Safari e non nell'icona:
+     nella mail **tiene premuto il link → Copia**, apre l'icona e lo incolla nel campo *Link della mail* → **Entra con il link**.
+  Il link vale una volta sola e scade dopo qualche ora: se serve, se ne chiede un altro.
 
 ---
 
@@ -120,6 +134,9 @@ I dati non si toccano: stanno nel database, non nei file.
 |---|---|
 | "L'account … non è tra quelli autorizzati" | Controlla le email in `firestore.rules` (scritte uguali all'account Google), poi `firebase deploy --only firestore:rules`. |
 | Su iPhone "Accedi con Google" non fa niente o torna indietro senza entrare | Rivedi i punti 6a (`authDomain` con `.web.app`) e 7, aspetta qualche minuto e riprova. Prova anche da Safari prima che dall'icona sulla Home. |
+| "l'accesso via email non è attivo in Firebase" | Passo 4b: attiva *Link via email*. |
+| La mail con il link non arriva | Guarda nello spam; il mittente è `noreply@NOME-PROGETTO.firebaseapp.com`. |
+| "il link è scaduto o è già stato usato" | Tocca *Cambia email o rimanda il link* e usa il link della mail più recente. |
 | `build_pages.py` scrive "Firebase: non configurato" | Manca `docs/firebase-config.js` (punto 6a). |
 | Dopo un aggiornamento vedi la versione vecchia | Chiudi e riapri l'app, oppure ricarica la pagina. |
 | "Firebase non è partito: …" | Di solito è un valore copiato male in `docs/firebase-config.js`. |
