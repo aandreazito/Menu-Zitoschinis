@@ -1,0 +1,15 @@
+rules_version = '2';
+// Solo Andrea e Alice possono leggere e scrivere il menu.
+// Sostituisci le due email prima di "firebase deploy".
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function famiglia() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email in ['EMAIL_DI_ANDREA', 'EMAIL_DI_ALICE'];
+    }
+    match /{document=**} {
+      allow read, write: if famiglia();
+    }
+  }
+}
