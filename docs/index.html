@@ -278,8 +278,15 @@ const Store = {
       try {
         if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
         this.auth = firebase.auth();
-        const u = await new Promise(r => { const off = this.auth.onAuthStateChanged(x => { off(); r(x); }); });
+        let u = await new Promise(r => { const off = this.auth.onAuthStateChanged(x => { off(); r(x); }); });
+        if (!u && this.auth.isSignInWithEmailLink(location.href)) {
+          const email = ls.get("mz.emailForSignIn", "");
+          if (email) { try { u = (await this.auth.signInWithEmailLink(email, location.href)).user; } catch (e) { this.linkError = this._authMsg(e); } }
+          else this.pendingLink = location.href;
+          try { history.replaceState(null, "", location.pathname + location.hash); } catch {}
+        }
         if (!u) { this.mode = "signin"; this.ready = true; this.onChange(); return; }
+        ls.set("mz.emailForSignIn", "");
         this.user = u; this.mode = "firebase"; this.db = firebase.firestore();
       } catch (e) { this.mode = "signin"; this.ready = true; this.error = String(e && e.message || e); this.onChange(); return; }
     }
@@ -328,6 +335,25 @@ const Store = {
       if (e && /popup|operation-not-supported/.test(e.code || "")) return this.auth.signInWithRedirect(provider);
       toast("Accesso non riuscito: " + (e && e.code || "riprova")); return;
     }
+    location.reload();
+  },
+  _authMsg(e) {
+    const c = (e && e.code) || "";
+    if (c === "auth/invalid-action-code" || c === "auth/expired-action-code") return "il link è scaduto o è già stato usato: chiedine uno nuovo";
+    if (c === "auth/invalid-email") return "l'email non sembra corretta";
+    if (c === "auth/operation-not-allowed") return "l'accesso via email non è attivo in Firebase (Authentication → Email/password → Link via email)";
+    if (c === "auth/unauthorized-continue-uri") return "il dominio dell'app non è tra i domini autorizzati di Firebase";
+    if (c === "auth/quota-exceeded") return "troppe email inviate oggi, riprova domani";
+    return c || "riprova";
+  },
+  async sendLink(email) {
+    await this.auth.sendSignInLinkToEmail(email, { url: location.origin + location.pathname, handleCodeInApp: true });
+    ls.set("mz.emailForSignIn", email);
+    this.linkSentTo = email; this.onChange();
+  },
+  async useLink(email, link) {
+    await this.auth.signInWithEmailLink(email, link);
+    ls.set("mz.emailForSignIn", "");
     location.reload();
   },
   async signOut() { await this.auth.signOut(); location.reload(); },
@@ -504,9 +530,29 @@ function renderWeek() {
     html += `<div class="status">Carico il menu…</div>`;
   }
   if (Store.mode === "signin") {
-    el.innerHTML = `<div class="empty-week"><h2>Accedi</h2><p>Il menu è condiviso tra Andrea e Alice: entra con il tuo account Google.</p>
+    const savedEmail = ls.get("mz.emailForSignIn", "");
+    let emailPart;
+    if (Store.pendingLink) {
+      emailPart = `<p>Hai aperto il link di accesso su un dispositivo diverso: scrivi di nuovo la tua email per entrare.</p>
+        <div class="field"><label for="lemail">La tua email</label><input type="text" id="lemail" inputmode="email" autocomplete="email" autocapitalize="off" value="${esc(savedEmail)}"></div>
+        <button class="btn primary" data-act="useLink">Entra</button>`;
+    } else if (Store.linkSentTo) {
+      emailPart = `<p>Ti ho mandato un link a <b>${esc(Store.linkSentTo)}</b>. Aprilo da questo telefono per entrare (se non lo trovi, guarda nello spam).</p>
+        <p>Usi l'app dall'icona sulla schermata Home? Nella mail tieni premuto il link, scegli <b>Copia</b> e incollalo qui:</p>
+        <div class="field"><label for="llink">Link della mail</label><input type="text" id="llink" autocomplete="off" autocapitalize="off" placeholder="https://…"></div>
+        <button class="btn primary" data-act="useLink">Entra con il link</button>
+        <button class="ghost" data-act="linkReset">Cambia email o rimanda il link</button>`;
+    } else {
+      emailPart = `<p>Senza account Google: ricevi un link per email e lo apri, niente password.</p>
+        <div class="field"><label for="lemail">La tua email</label><input type="text" id="lemail" inputmode="email" autocomplete="email" autocapitalize="off" value="${esc(savedEmail)}" placeholder="nome@esempio.it"></div>
+        <button class="btn" data-act="sendLink">Mandami il link di accesso</button>`;
+    }
+    el.innerHTML = `<div class="empty-week"><h2>Accedi</h2><p>Il menu è condiviso tra Andrea e Alice.</p>
       ${Store.error ? `<p>Firebase non è partito: ${esc(Store.error)}</p>` : ""}
-      <div class="btns"><button class="btn primary" data-act="signin">Accedi con Google</button></div></div>`;
+      ${Store.linkError ? `<div class="notice">Accesso non riuscito: ${esc(Store.linkError)}</div>` : ""}
+      <div class="btns"><button class="btn primary" data-act="signin">Accedi con Google</button></div>
+      <div class="sectiontitle">oppure con la tua email</div>
+      <div class="btns">${emailPart}</div></div>`;
     return;
   }
   if (Store.denied) html += `<div class="notice">L'account ${esc(Store.user?.email || "")} non è tra quelli autorizzati. <button class="ghost" data-act="signout">Esci e cambia account</button></div>`;
@@ -843,6 +889,21 @@ document.addEventListener("click", e => {
     const a = act.dataset.act;
     if (a === "weeknote") editWeekNote(); else if (a === "newrecipe") newRecipe();
     else if (a === "signin") Store.signIn(); else if (a === "signout") Store.signOut();
+    else if (a === "sendLink") {
+      const email = ($("#lemail")?.value || "").trim();
+      if (!/^\S+@\S+\.\S+$/.test(email)) { toast("Scrivi un'email valida"); $("#lemail")?.focus(); return; }
+      act.disabled = true;
+      Store.sendLink(email).catch(e => { act.disabled = false; toast("Link non inviato: " + Store._authMsg(e)); });
+    }
+    else if (a === "useLink") {
+      const link = Store.pendingLink || ($("#llink")?.value || "").trim();
+      const email = Store.pendingLink ? ($("#lemail")?.value || "").trim() : Store.linkSentTo;
+      if (!Store.auth.isSignInWithEmailLink(link)) { toast("Questo non è il link della mail: copialo di nuovo"); return; }
+      if (!email) { toast("Scrivi la tua email"); return; }
+      act.disabled = true;
+      Store.useLink(email, link).catch(e => { act.disabled = false; toast("Accesso non riuscito: " + Store._authMsg(e)); });
+    }
+    else if (a === "linkReset") { Store.linkSentTo = null; render(); }
     else if (a === "importSeed") { act.disabled = true; Store.importSeed().catch(e => { act.disabled = false; toast("Non caricato: " + Store._err(e)); }); }
     else startWeek(a);
     return;
