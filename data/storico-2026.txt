@@ -1,0 +1,260 @@
+# Trascrizione dei menu cartacei 2026.
+# Formato: == lunedì della settimana | nota
+# riga giorno: colazione | pranzo | cena   (# tag giorno)
+# "AZ: x / AT: y" = pasto diverso per Andrea e Alice;  "!" = fuori casa / evento;  "-" = vuoto
+== 2026-01-12
+Porridge | AT: !Deli / AZ: Pasta al pesto di rucola, tofu e zucchine | Vellutata di zucca + torta salata agli spinaci
+Pane e marmellata | AT: !Deli / AZ: Risotto | Seitan + fagiolini al sugo
+Porridge | AT: !Pranzo fuori / AZ: Pasta al pesto di rucola + torta salata | Minestrone con lenticchie
+Avo e tofu toast | Fregola ai broccoli + ceci | Tofu + verdure al forno
+Pane e marmellata | AT: !Deli / AZ: Pasta al sugo | Hamburger veg
+- | - | Pizza
+- | - | -
+== 2026-01-19
+Porridge | AT: !Deli / AZ: Gnocchi al sugo + tortilla | Dahl di lenticchie + riso + spinaci
+Pane e marmellata | AT: !Deli / AZ: Patate al forno + wrap veg | Tofu + fagiolini
+Porridge | Pasta e ceci + fagiolini | Spezzatino con carote e piselli
+AT: Pane e marmellata / AZ: Yogurt | AT: Hummus + insalata / AZ: Spezzatino avanzato | Torta salata cavolfiore e porri
+Avocado e tofu toast | Dahl di lenticchie avanzato | -
+- | - | -
+- | - | AT: !Pizza con colleghi / AZ: -
+== 2026-01-26
+Porridge | Orecchiette alle cime di rapa + crema di cannellini | Polpette di ceci e zucchine + finocchi gratinati
+Yogurt | Risotto giallo e zucchine | Frittata con porri + fagiolini bolliti
+Uova e avocado | Spaghetti al sugo + fagiolini bolliti | Seitan alla pizzaiola + coste bollite
+Pane e marmellata | AZ: Risotto avanzato / AT: Hummus + insalata | Sformato di verdure + zucca
+Pane e marmellata | AZ: Gnocchi al sugo / AT: Sformato avanzato | Tofu alla bolognese + coste bollite
+Pancakes | - | Pita + falafel + hummus
+- | - | -
+== 2026-02-02
+Pane e marmellata | AT: !Ufficio / AZ: Ravioli | Tofu in agrodolce con fagiolini
+Pane e marmellata | AT: !Ufficio / AZ: Avanzi di domenica | Zuppa di fagioli e cavolo nero
+Porridge | Pasta alla crema di broccoli + avanzi | Seitan + sformato di verdure (finocchi, carote, zucchine, cavolfiore)
+AT: Pane e marmellata / AZ: Yogurt | AT: Hummus con verdure / AZ: Ravioli + verdure | Focaccia con fagioli e pesto
+Avo toast | Risotto radicchio, pere e noci | Tofu alla mediterranea + coste
+Pancakes | - | Falafel o pizza
+- | - | Falafel o pizza
+== 2026-02-09
+Pane e marmellata | AT: !Delicatessen / AZ: Zuppa | Tofu saltato + fagiolini in umido
+Porridge | Pasta al ragù + fagiolini avanzati | Vellutata di zucca e zucchine + cannellini + coste
+Pane e marmellata | AT: !Ufficio / AZ: Seitan + mix di verdure | Torta salata ceci e porri + coste
+Avo toast | AT: !Pranzo fuori / AZ: Ravioli | !Al sacco (hockey)
+Porridge | Pasta al ragù | !Pizza con i cugini
+- | !Ikea | -
+- | - | -
+== 2026-02-16
+Pane e marmellata | AT: !Delicatessen / AZ: Polenta | Seitan con mix di verdure
+AT: Yogurt / AZ: Pane e marmellata | AT: Hummus + mix di verdure / AZ: Scarola + hummus | Parmigiana di melanzane + spinaci
+Pane e marmellata | AT: !Delicatessen / AZ: Parmigiana avanzata | Minestrone con lenticchie
+Uova e avo toast | Pasta di lenticchie al sugo + spinaci | Tofu croccante + puntarelle
+Porridge | Torta salata ceci e porri | Pizza
+- | - | !Aperitivo da Fede
+- | - | -
+== 2026-02-23
+Porridge | Orzo risottato ai funghi porcini | Dahl di lenticchie + riso basmati
+Pane e marmellata | AT: !Deli / AZ: Ravioli | Tofu in agrodolce + fagiolini
+Pane e marmellata | AT: !Indiano / AZ: Dahl avanzato | AT: Uova, avocado e fagiolini / AZ: !Fuori
+Pane e marmellata | AT: Hummus + fagiolini e spinaci / AZ: Dahl avanzato | Polpette di ceci + finocchi gratinati
+Avo toast | Pasta di legumi al sugo + spinaci | Chicken burger veg + verdure grigliate
+- | - | -
+- | - | -
+== 2026-03-02
+Porridge | AT: !Deli / AZ: Risotto | Tofu in agrodolce + mix di cavoli
+Porridge | Pasta di legumi al sugo + zucchine | Torta salata ceci e porri + verdure al forno
+Pane e marmellata | AT: !Deli / AZ: Ravioli | Seitan alla piastra + verdure al forno
+Avo e uovo toast | Pasta al ragù + fagiolini | Falafel, hummus, pita + fattoush
+Porridge | AT: Hummus + fagiolini / AZ: Pasta al ragù | Poke (riso venere, edamame, avocado, tofu, pomodorini)
+Pancakes | - | -
+- | - | -
+== 2026-03-09
+Porridge | AT: !Deli / AZ: Pizzoccheri | Tempeh con fagiolini
+AT: Yogurt / AZ: Pane e marmellata | Farro con pesto, fagiolini e tofu affumicato | Pasta e fagioli + coste
+Porridge | AT: !Deli / AZ: Pasta e fagioli | Gnocchi al sugo + coste
+Avo e tofu toast | Cous cous con ceci, verdure e uvetta | Seitan alla pizzaiola + finocchi gratinati
+Pane e marmellata | AT: Hummus + finocchi / AZ: Cous cous | Chili
+- | - | -
+- | - | -
+== 2026-03-16
+Porrimisù | AT: !Deli / AZ: Chili avanzato | Farinata + coste
+Porridge | AT: !Deli / AZ: Risotto | Spezzatino con carote e piselli
+Pane e marmellata | AT: !Deli / AZ: Ravioli | Tofu in agrodolce con fagiolini
+Avo e tofu toast | Pasta di legumi con zucchine | Frittata con cipolle e spinaci
+Porridge banana e cioccolato | Torta salata tofu e spinaci | !Cena fuori
+- | - | -
+- | - | -
+== 2026-03-23
+Porrimisù | AT: !Sushi / AZ: Lasagne | Polpette veg + spinaci
+Pane e marmellata | Torta salata tofu e spinaci | Risotto zafferano e zucchine
+Porrimisù | AT: !Deli / AZ: Risotto avanzato | Sticky seitan + fagiolini
+Avo e tofu toast | Pasta di legumi con pesto e fagiolini | Spezzatino con carote e piselli
+Porridge | Pasta ceci e rosmarino + verdure | Pizza
+- | - | -
+- | - | -
+== 2026-03-30
+Porrimisù | AT: !Deli / AZ: Busiate al pesto | Sticky tofu + pak choi + riso
+Pane e marmellata | Pasta di legumi al sugo di melanzane | Torta salata porri e cannellini
+Porrimisù | AT: !Deli / AZ: Torta salata avanzata | Orzotto agli asparagi
+Avo e tofu toast | Cous cous | Seitan alla pizzaiola + fagiolini
+Porridge | AT: Hummus + verdure / AZ: Cous cous | Linguine zucchine e limone + hummus
+Crêpes | Toast | Pizza
+- | !Pasqua | !Pasqua
+== 2026-04-06 | Pasquetta
+Colomba | Avanzi | Avanzi
+Porridge | AZ: Crespelle / AT: Insalatona | Polpette di lenticchie + patate tonde + cavolfiore
+Pane e marmellata | AZ: Ravioli / AT: !Pranzo fuori | Ceci al curry + riso basmati + fagiolini
+Avo e tofu toast | Pasta di legumi con zucchine | Frittata agli asparagi + fagiolini
+Porridge | AZ: Focaccia / AT: Hummus + verdure | Linguine zucchine e limone + hummus
+- | - | Pizza
+- | - | -
+== 2026-04-13
+Porrimisù | AT: Hummus + verdure / AZ: Ravioli | Seitan alla mediterranea + spinaci
+Avo e tofu toast | Pasta ceci e rosmarino + cavolfiore | Ceci al curry + cavolfiore + riso
+Porrimisù | AT: !Eataly / AZ: Ceci, cavolfiore e riso avanzati | Sticky tofu + coste
+Pane e marmellata | Pasta di legumi con melanzane | Frittata con cipolle + coste
+Porridge | Pasta crema di tofu e melanzane | Risotto zafferano e zucchine
+Pancakes | Insalatona (pomodorini, ceci, olive, tofu) | Pizza
+- | - | -
+== 2026-04-20
+Porrimisù | AT: !Deli / AZ: Cous cous | Tofu alla mediterranea + zucchine
+Porrimisù | AT: !Deli / AZ: Cous cous | AT: - / AZ: !Concerto
+Porridge con mele | Trofie al pesto + tofu affumicato e zucchine | Pita e falafel + hummus + melanzane
+Avo e tofu toast | Torta salata tofu e spinaci | Orzotto con asparagi
+Pane e marmellata | Seitan + melanzane | Purè di fave + cicorie + crostini di pane
+- | - | !Hotel
+- | - | -
+== 2026-04-27
+Porrimisù | AT: !Deli / AZ: Ravioli | Ceci al curry + riso + fagiolini
+Pane e marmellata | Orzo con pesto, tofu, pomodorini e fagiolini | Frittata + piselli
+Porrimisù | AT: !Deli / AZ: Orzo avanzato | Seitan alla pizzaiola + piselli
+Avo e tofu toast | Pasta ceci e rosmarino + zucchine | Sticky tofu e pak choi
+Porridge | !Pic-nic | Patate schiacciate + polpette di lenticchie
+- | Cous cous | Pizza
+- | - | -
+== 2026-05-04
+Porrimisù | AT: !Deli / AZ: Pasta al pesto e ceci | Tofu alla mediterranea + fagiolini
+Pane e marmellata | AT: Hummus + tabulè / AZ: Ravioli | Risotto zafferano e zucchine
+Porrimisù | AT: !Netcomm / AZ: Pasta e fagioli | Frittata + melanzane
+Avo e tofu toast | Pasta di legumi con melanzane | Farinata con asparagi e zucchine + insalata
+Porridge | Farinata avanzata | Parmigiana
+- | Insalata greca | !Pizza con i cugini
+- | - | -
+== 2026-05-11
+Porrimisù | AZ: Cous cous / AT: Pasta di legumi + zucchine | Falafel + pita + hummus + fattoush
+Porrimisù | AZ: Cous cous / AT: !Roma | AZ: Seitan + spinaci + riso / AT: !Roma
+Pane e marmellata | AZ: Pasta fresca al pesto / AT: !Roma | Sticky tofu + pak choi
+Brunch | Insalatona di quinoa | Pasta al forno
+Porridge | Pasta ceci e rosmarino + verdure | Risotto ai piselli
+Pancakes | - | Pizza
+- | !Genova | -
+== 2026-05-18
+Porridge | Pasta di legumi al sugo e zucchine | Ceci al curry con spinaci + riso
+Porrimisù | AZ: Pasta al sugo / AT: !Deli | AZ: !Zito's / AT: !Milano
+Avo e tofu toast | Seitan con melanzane | Toast
+Porrimisù | AZ: Ravioli / AT: Hummus + verdure | Insalata greca
+Pane e marmellata | Insalatona | AT: !Da mamma / AZ: -
+- | - | !Aperipizza con colleghi
+- | - | AT: !Da mamma / AZ: -
+== 2026-05-25
+Porridge | Pasta crema di ceci + zucchine | Tofu + fagiolini
+Pane e marmellata | AT: !Deli / AZ: Ravioli | AT: !Fuori / AZ: Seitan + spinaci
+Porrimisù | AT: Hummus + zucchine / AZ: Cous cous | Fave e cicorie
+Porrimisù | AT: Insalatona / AZ: Cous cous | Frittata di ceci con asparagi
+Avo e tofu toast | Pasta cannellini e zafferano (pomodorini) | Polpette veg
+Porridge | !Vacanza | !Vacanza
+!Hotel | !Vacanza | !Vacanza
+== 2026-06-01
+- | Avanzi | Pane e melone
+Porridge | Pasta di ceci al pesto | Pizza in casa
+Porrimisù | Caprese | Orzotto zafferano e asparagi
+Porrimisù | Ravioli | Sticky tofu e piselli + riso
+Pane e marmellata | Panzanella con tofu | !Cena da Filippo
+Avo e tofu toast | Pasta al pesto, pomodorini e tofu affumicato | !Aperitivo con i cugini + melone
+Pancakes | - | -
+== 2026-06-08
+Pane e marmellata | Cous cous | Pasta al ragù
+Porrimisù | AT: Burger + insalata / AZ: Cous cous | Frittelle di ceci con piselli e asparagi
+Porrimisù | AT: !Deli / AZ: Ravioli | Seitan con zucchine
+Avo e tofu toast | Pasta di legumi con sugo di zucchine | Pita con falafel, hummus, fattoush
+Porridge | Pasta al ragù | Insalata greca + melone
+Pancakes | - | Pizza
+- | - | -
+== 2026-06-15
+Porrimisù | AT: Hamburger + insalata / AZ: Ravioli | Sticky tofu e melanzane
+Avo e tofu toast | Pasta ceci e pomodorini | Seitan alla mediterranea con melanzane
+Porridge | Cous cous | Caprese + hummus
+Porrimisù | AT: !Libanese / AZ: Pasta ceci e pomodorini | !Pizza in ufficio
+Pane e marmellata | Orzo con pesto, pomodorini e tofu affumicato | Panzanella + melone
+- | - | -
+- | - | -
+== 2026-06-29
+Pane e marmellata | Pasta con pesto di piselli | Pita + hummus + fattoush + falafel
+Avo e tofu toast | Panzanella + tofu | !Pizza con Tedeschini
+Porrimisù | AT: Panzanella + verdure / AZ: Cous cous | AT: Insalata di melone / AZ: !Aperitivo
+Porrimisù | AT: !Misogi / AZ: Cous cous | Caprese + hummus
+Porridge | Pasta ceci e pomodorini | AT: !Gelateria / AZ: !Grigliata da Bibi
+Light breakfast | !Le Vele | -
+- | - | -
+== 2026-07-20
+Pane e marmellata | Gnocchi al forno + zucchine | Fagioli + spinaci
+Porridge | AZ: Pasta al ragù / AT: Hummus + insalata | Tofu strapazzato + spinaci  # AZ: ufficio
+Porridge | AZ: Cous cous / AT: Cous cous | Seitan e piselli in umido  # AZ: ufficio
+Pane e marmellata | Pasta al pesto di piselli | Lenticchie con patate al forno
+Porridge | Insalata di pomodori, avocado, mais e tofu | Torta salata ceci e porri
+Pane e marmellata | - | -
+Porridge | - | -
+== 2026-09-14
+Pane e marmellata | Gnocchi al ragù | Seitan + fagiolini
+Pane e marmellata | Pasta di ceci al pesto + fagiolini | Pasta e fagioli
+Porridge | Risotto | Risotto ai funghi
+Pane e marmellata | Tofu alla mediterranea + melanzane | Vellutata di zucca, patate e cannellini
+Porridge | Avo e tofu toast + zucchine | Vellutata avanzata
+Pane e marmellata | Insalatona | Seitan con piselli in umido
+Porridge | - | Pizza
+== 2026-09-28
+Fette biscottate | Pasta di legumi al pesto | Tofu strapazzato, avocado e spinaci
+Porridge | AZ: Pasta al sugo + ceci / AT: Hummus + insalata | Minestrone  # AT: ufficio
+Porridge | Insalata di basmati, avocado, mais e tofu affumicato | Torta salata di farina di ceci, pesto e fagiolini
+Pane e marmellata | Seitan croccante + fagiolini | Risotto giallo e zucchine
+Pane e marmellata | Tofu in pastella + zucchine | Orecchiette con cime di rapa e cavolfiore
+Porridge | - | -
+Pane e marmellata | - | -
+== 2026-10-05 | Da cucinare: melanzane e zucca
+Porridge | AZ: Pasta e ceci / AT: Pasta e ceci | Seitan con piselli in umido  # AZ: ufficio
+Pane e marmellata | Pasta di legumi con pesto di piselli | Torta salata ceci e zucchine
+Porridge | AZ: Zuppa pronta / AT: !Dai nonni | AZ: !Aperitivo / AT: Hummus + insalata  # AZ: ufficio
+Pane e marmellata | Pasta alla crema di zucca | Tofu con melanzane arrosto
+Porridge | Ceci al curry + riso + fagiolini | !Pizza al Lagaccio
+- | - | -
+- | - | -
+== 2026-10-12
+Porridge | AT: Hummus + insalata / AZ: Pasta al pesto e ceci | Minestrone con lenticchie  # AZ: ufficio
+Pane e marmellata | Seitan alla piastra + spinaci | Pasta e fagioli
+Porridge | Pasta al pesto e fagioli avanzata | Parmigiana
+Porridge | Pasta e fagioli avanzata + insalatona | AT: Zuppa pronta / AZ: !Aperitivo  # AZ: ufficio
+Pane e marmellata | Tofu strapazzato con fagiolini | Orzotto ai porcini
+- | - | !Cena dai nonni
+- | AT: !Pranzo con le colleghe / AZ: - | -
+== 2026-10-19
+Fette biscottate | Ravioli al sugo | Torta salata ceci e spinaci
+Porridge | Pasta al ragù di lenticchie (+ spinaci) | Spezzatino al curry + fagiolini
+Porridge | AZ: Spezzatino avanzato / AT: Hummus + insalata | !Aperitivo + pizza  # AT: ufficio
+Pane e marmellata | Pasta al pesto con ceci e fagiolini | Butter beans (zucca e cavolo nero) + crostini di pane
+Porridge | Lenticchie in umido + mix di verdure | Orzotto ai porcini
+- | Chili | -
+Pancakes | - | -
+== 2026-10-26
+Porridge | AZ: Zuppa / AT: Hummus + insalata | Chili
+Pane e marmellata | Cous cous | Butter beans (zucca e cavolo nero) + crostini di pane
+Pane e marmellata | Pasta ceci e broccoli | Orzotto ai porcini
+Porridge | AZ: Orzotto ai porcini avanzato / AT: Hummus + insalata | Minestrone + polpettine  # AZ: ufficio
+Porridge | Cous cous | Polpette di tofu + broccoli  # AT: palestra
+Pane e marmellata | !Pranzo dopo cavallo | -
+- | - | -
+== 2026-11-02
+Pane e marmellata | Pasta con pesto di piselli | Torta salata ceci e spinaci + verdure al forno
+Pane e marmellata | Pasta di legumi al sugo | Seitan con verdure al forno  # AZ: ufficio
+Porridge | AZ: Hamburger + verdure al forno / AT: Hamburger + insalata | Passato di verdure + crostini  # AZ: ufficio
+Porridge | AZ: Zuppa / AT: Insalatona | Lasagne zucca e cavolfiore
+Porridge | Pasta con pesto di piselli | Polpette di tofu + broccoli  # AT: palestra
+Pancakes | - | AT: !Cena con le colleghe / AZ: Pizza
+- | - | -
